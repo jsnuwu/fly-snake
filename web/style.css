@@ -1,0 +1,66 @@
+:root {
+  color-scheme: dark;
+  --ink: #d8d8d8; --ink-strong: #f0f0f0; --muted: #8a8d93; --faint: #6f7278;
+  --line: #2a2c31; --surface: #17181b; --accent: #52c08a;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: #111214; }
+body { color: var(--ink); font: 14px/1.5 system-ui, "Segoe UI", sans-serif; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:disabled { opacity: .45; cursor: default; }
+:focus-visible { outline: 2px solid #5b8fd6; outline-offset: 2px; }
+
+.stage { max-width: 660px; margin: 0 auto; padding: 24px 16px 36px; min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+
+/* the game, styled like Google Snake */
+.board { background: #4a752c; }
+.bar { display: flex; align-items: center; gap: 22px; height: 54px; padding: 0 18px; color: #fff; font-size: 20px; font-weight: 600; }
+.score { display: flex; align-items: center; gap: 8px; }
+.score b { font-weight: 600; font-variant-numeric: tabular-nums; }
+.score small { font-size: 13px; font-weight: 500; opacity: .8; }
+.apple { width: 22px; height: 22px; border-radius: 50%; background: #e7471d; position: relative; }
+.apple::after { content: ''; position: absolute; left: 11px; top: -5px; width: 8px; height: 6px; border-radius: 0 8px 0 8px; background: #6ab04c; }
+.games { margin-left: auto; font-size: 13px; font-weight: 500; opacity: .8; }
+.field { position: relative; padding: 0 18px 18px; }
+#board { display: block; width: 100%; height: auto; }
+.overlay { position: absolute; inset: 0 18px 18px; display: grid; place-items: center; text-align: center;
+  font-size: 24px; font-weight: 700; color: #fff; pointer-events: none; background: rgba(20, 30, 12, .45); transition: opacity .2s; }
+.overlay[hidden] { display: grid !important; opacity: 0; }
+.overlay small { display: block; font-size: 14px; font-weight: 500; margin-top: 4px; }
+
+/* controls */
+.controls { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+.row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.row.small { font-size: 12px; color: var(--muted); gap: 14px; }
+.spacer { flex: 1; }
+.controls button { background: transparent; border: 1px solid var(--line); border-radius: 4px; padding: 6px 12px; font-size: 13px; }
+.controls button:not(:disabled):hover { border-color: #4a4d53; color: var(--ink-strong); }
+.controls button.primary { min-width: 96px; font-weight: 600; color: #0f1a13; background: var(--accent); border-color: var(--accent); }
+.controls button.primary:not(:disabled):hover { color: #0f1a13; background: #62cf99; }
+.controls button.primary.pause, .controls button.primary.pause:not(:disabled):hover { background: var(--ink-strong); border-color: var(--ink-strong); }
+.controls button.danger { color: #e05a52; border-color: #e05a52; }
+.controls button.link { border: none; padding: 0; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+.controls button.link:hover { color: var(--ink-strong); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 4px; }
+.seg button { border: none !important; border-radius: 0 !important; padding: 6px 12px !important; color: var(--muted); }
+.seg button + button { border-left: 1px solid var(--line) !important; }
+.seg button.on { background: #26282d; color: var(--ink-strong); }
+.switch { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; cursor: pointer; user-select: none; }
+.switch input { width: 15px; height: 15px; margin: 0; accent-color: var(--accent); cursor: pointer; }
+
+.about { color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); padding-top: 12px; }
+.about summary { cursor: pointer; color: var(--ink); }
+.about p { margin: 10px 0 0; }
+.about b { color: var(--ink); font-weight: 600; }
+
+@media (max-width: 1180px) {
+  .stage { min-height: 0; padding-bottom: 0; }
+}
+@media (max-width: 560px) {
+  .bar { height: 46px; font-size: 17px; padding: 0 12px; }
+  .field { padding: 0 12px 12px; }
+  .overlay { inset: 0 12px 12px; font-size: 19px; }
+  .seg button { padding: 6px 9px !important; }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "fly-snake",
+  "version": "1.0.0",
+  "description": "Fruchtfliegen-Connectome spielt Google Snake und lernt mit Dopamin",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "play": "node play.ts",
+    "train": "node train.ts",
+    "web": "node ../web/build.ts && node ../web/serve.ts"
+  },
+  "dependencies": {
+    "puppeteer-core": "^25.12.0"
+  }
+}

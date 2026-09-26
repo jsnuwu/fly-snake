@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>fly-snake – ein Fliegenhirn lernt Snake</title>
+  <meta name="description" content="Ein echter Ausschnitt des Fruchtfliegen-Gehirns spielt Snake und lernt mit Dopamin dazu, direkt im Browser.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%234a752c'/><rect x='3' y='7' width='8' height='3' fill='%234e7cf6'/><circle cx='13' cy='8.5' r='1.6' fill='%23e7471d'/></svg>">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <main class="stage">
+    <div class="fly-game-frame board">
+      <div class="bar">
+        <span class="score"><span class="apple"></span><b id="score">0</b></span>
+        <span class="score"><small>Rekord</small><b id="best">0</b></span>
+        <span class="games" id="games"></span>
+      </div>
+      <div class="field">
+        <canvas id="board" aria-label="Snake-Spielfeld"></canvas>
+        <div class="overlay" id="overlay"><div>Lade Gehirn …</div></div>
+      </div>
+    </div>
+
+    <section class="controls" aria-label="Steuerung">
+      <div class="row">
+        <button class="primary" id="run" disabled>Start</button>
+        <div class="seg" id="speed" role="group" aria-label="Tempo">
+          <button data-speed="langsam">langsam</button>
+          <button data-speed="normal" class="on">normal</button>
+          <button data-speed="schnell">schnell</button>
+          <button data-speed="turbo">turbo</button>
+        </div>
+      </div>
+      <div class="row">
+        <label class="switch"><input type="checkbox" id="learning" checked>Lernen</label>
+        <label class="switch"><input type="checkbox" id="schutz">Reflex-Schutz</label>
+        <span class="spacer"></span>
+        <button id="trained" title="Die vortrainierte Fliege laden">Trainierte Fliege</button>
+        <button id="fresh" title="Gedächtnis löschen, die Fliege fängt bei null an">Neue Fliege</button>
+      </div>
+      <div class="row small">
+        <span id="status">–</span>
+        <span class="spacer"></span>
+        <button class="link" id="export">Gedächtnis sichern</button>
+        <button class="link" id="import">Gedächtnis laden</button>
+        <input type="file" id="file" accept=".json,application/json" hidden>
+      </div>
+    </section>
+
+    <details class="about">
+      <summary>Wie funktioniert das?</summary>
+      <p>Die Schlange wird von einem Ausschnitt aus dem Nervensystem der Fruchtfliege gesteuert: 4.812 Neuronen und
+        266.216 Verbindungen aus dem MaleCNS-Connectome von Janelia und Google. Augen-Neuronen sehen Apfel und Wände,
+        Lenk- und Fluchtneuronen entscheiden die Richtung. Das ist der <b>Instinkt</b>, er kommt allein aus der
+        Verdrahtung.</p>
+      <p>Dazu lernt sie ähnlich wie im Pilzkörper einer echten Fliege: Die jeweils ~100 auffälligsten Neuronen bilden
+        einen <b>Gedächtnis-Code</b>, und ein <b>Körpersinn</b> meldet die Länge der Schlange und ob ein Weg in eine
+        Sackgasse führt. Ein Apfel ist besser als erwartet, also stärkt <b>Dopamin</b> die gerade aktiven Synapsen;
+        ein Crash schwächt sie. Im Turbo sieht man die Lernkurve steigen.</p>
+      <p>Alles läuft in deinem Browser, das Gedächtnis wird auch dort gespeichert. <b>Neue Fliege</b> fängt bei null an,
+        <b>Trainierte Fliege</b> lädt eine mit Erfahrung.</p>
+    </details>
+  </main>
+</body>
+</html>
