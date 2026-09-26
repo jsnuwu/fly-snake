@@ -98,11 +98,20 @@ function setRunning(on) {
 }
 
 onmessage = async ({ data: m }) => {
+  if (!game && m.cmd !== 'init') {
+    // still loading: remember the settings, ignore the rest
+    if (m.cmd === 'speed') speed = m.speed
+    if (m.cmd === 'schutz') schutz = m.on
+    if (m.cmd === 'learning') learning = m.on
+    return
+  }
   switch (m.cmd) {
     case 'init': {
       brain = new Brain(await loadJSON('data/network.json'))
+      const l = m.memory?.n === brain.N ? Learner.fromJSON(m.memory, brain.N) : await trained()
+      // the page enables Start on 'ready', so everything has to exist before that
       postMessage({ type: 'ready', layout: panelLayout(brain) })
-      use(m.memory?.n === brain.N ? Learner.fromJSON(m.memory, brain.N) : await trained())
+      use(l)
       break
     }
     case 'run': setRunning(m.on); break
